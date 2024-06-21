@@ -8,7 +8,7 @@ import emoji
 import os
 
 # Streamlit app title
-st.title('Unveiling Sentiment A Deep Dive into Sentiment Analysis :koala:')
+st.title('Unveiling Sentiment: A Deep Dive into Sentiment Analysis 🐨')
 
 # Function to load model and predict sentiment
 def predict_sentiment(custom_data):
