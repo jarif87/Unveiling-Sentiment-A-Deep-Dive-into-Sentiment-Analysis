@@ -10,20 +10,17 @@ import os
 # Streamlit app title
 st.title('Unveiling Sentiment: A Deep Dive into Sentiment Analysis 🐨')
 
-# Print the current working directory
-st.write(f"Current working directory: {os.getcwd()}")
-
 # Function to load model and predict sentiment
 def predict_sentiment(custom_data):
     model_path = '/mount/src/unveiling-sentiment-a-deep-dive-into-sentiment-analysis/sentiment_analysis_model.h5'  # Use absolute path
-    st.write(f"Model path: {model_path}")  # Debugging line to check the model path
     try:
-        # Load the trained model
+        # Check if the model file exists
         if not os.path.exists(model_path):
-            raise FileNotFoundError(f"The model file was not found at {model_path}")
-        
+            st.error(f"Model file not found at {model_path}")
+            return None
+
+        # Load the trained model
         model = load_model(model_path)
-        st.write("Model loaded successfully.")  # Debugging line to confirm model loading
 
         # Load the one-hot encoding information
         with open('one_hot_info_1.pkl', 'rb') as handle:
