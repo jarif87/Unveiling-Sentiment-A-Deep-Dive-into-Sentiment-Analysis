@@ -5,27 +5,32 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import one_hot
 import pickle
 import emoji
+import os
 
 # Streamlit app title
 st.title('Unveiling Sentiment A Deep Dive into Sentiment Analysis :koala:')
 
-# Load the trained model and one-hot encoding information
-model = load_model('sentiment_analysis_model.h5')
-with open('one_hot_info_1.pkl', 'rb') as handle:
-    one_hot_info = pickle.load(handle)
-vocab_size = one_hot_info['vocab_size']
-max_len = one_hot_info['max_len']
-
-# Define labels with emojis
-labels_with_emojis = {
-    'Positive': '😊',
-    'Neutral': '😐',
-    'Negative': '😔'
-}
-
-# Function to predict sentiment
+# Function to load model and predict sentiment
 def predict_sentiment(custom_data):
+    model_path = os.path.join(os.getcwd(), 'sentiment_analysis_model.h5')  # Adjust if needed
     try:
+        # Load the trained model
+        model = load_model(model_path)
+
+        # Load the one-hot encoding information
+        with open('one_hot_info_1.pkl', 'rb') as handle:
+            one_hot_info = pickle.load(handle)
+
+        vocab_size = one_hot_info['vocab_size']
+        max_len = one_hot_info['max_len']
+
+        # Define labels with emojis
+        labels_with_emojis = {
+            'Positive': '😊',
+            'Neutral': '😐',
+            'Negative': '😔'
+        }
+
         # One-hot encode each tweet
         one_hot_texts = [one_hot(text, vocab_size) for text in custom_data]
 
@@ -53,10 +58,7 @@ def predict_sentiment(custom_data):
 # Streamlit UI
 user_input = st.text_area("Please enter the tweet you'd like analyzed::whale:")
 
-# Style for the Analyze button
-button_style = "background-color: darkorange; color: white;"
-
-if st.button('Analyze', key='analyze_button', help="Click to analyze the sentiment", style=button_style):
+if st.button('Analyze', key='analyze_button', help="Click to analyze the sentiment", style="background-color: darkorange; color: white;"):
     if user_input.strip():  # Check if input is not empty
         # Remove emojis and replace with their description
         user_input = emoji.demojize(user_input)
