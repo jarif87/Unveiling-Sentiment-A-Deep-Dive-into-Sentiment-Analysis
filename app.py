@@ -15,7 +15,7 @@ st.write(f"Current working directory: {os.getcwd()}")
 
 # Function to load model and predict sentiment
 def predict_sentiment(custom_data):
-    model_path = os.path.join(os.getcwd(), 'sentiment_analysis_model.h5')  # Adjust if needed
+    model_path = '/mount/src/unveiling-sentiment-a-deep-dive-into-sentiment-analysis/sentiment_analysis_model.h5'  # Use absolute path
     st.write(f"Model path: {model_path}")  # Debugging line to check the model path
     try:
         # Load the trained model
