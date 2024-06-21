@@ -19,6 +19,8 @@ def predict_sentiment(custom_data):
             st.error(f"Model file not found at {model_path}")
             return None
 
+        st.write(f"Model file found at {model_path}")
+
         # Load the trained model
         model = load_model(model_path)
 
@@ -67,10 +69,10 @@ if st.button('Analyze', key='analyze_button', help="Click to analyze the sentime
     if user_input.strip():  # Check if input is not empty
         # Remove emojis and replace with their description
         user_input = emoji.demojize(user_input)
-        
+
         # Split input by newlines to handle multiple tweets
         tweets = user_input.split('\n')
-        
+
         # Predict sentiment for custom data
         predicted_sentiments = predict_sentiment(tweets)
 
