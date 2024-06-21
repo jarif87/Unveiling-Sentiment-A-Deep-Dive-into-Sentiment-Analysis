@@ -10,12 +10,17 @@ import os
 # Streamlit app title
 st.title('Unveiling Sentiment: A Deep Dive into Sentiment Analysis 🐨')
 
+# Print the current working directory
+st.write(f"Current working directory: {os.getcwd()}")
+
 # Function to load model and predict sentiment
 def predict_sentiment(custom_data):
     model_path = os.path.join(os.getcwd(), 'sentiment_analysis_model.h5')  # Adjust if needed
+    st.write(f"Model path: {model_path}")  # Debugging line to check the model path
     try:
         # Load the trained model
         model = load_model(model_path)
+        st.write("Model loaded successfully.")  # Debugging line to confirm model loading
 
         # Load the one-hot encoding information
         with open('one_hot_info_1.pkl', 'rb') as handle:
