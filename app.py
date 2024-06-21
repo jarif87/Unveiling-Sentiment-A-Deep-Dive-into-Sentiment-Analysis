@@ -58,7 +58,7 @@ def predict_sentiment(custom_data):
 # Streamlit UI
 user_input = st.text_area("Please enter the tweet you'd like analyzed:")
 
-if st.button('Analyze', key='analyze_button', help="Click to analyze the sentiment", class="css-1u2kkr2 e1g4xk9w0"):
+if st.button('Analyze', key='analyze_button', help="Click to analyze the sentiment"):
     if user_input.strip():  # Check if input is not empty
         # Remove emojis and replace with their description
         user_input = emoji.demojize(user_input)
