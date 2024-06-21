@@ -19,6 +19,9 @@ def predict_sentiment(custom_data):
     st.write(f"Model path: {model_path}")  # Debugging line to check the model path
     try:
         # Load the trained model
+        if not os.path.exists(model_path):
+            raise FileNotFoundError(f"The model file was not found at {model_path}")
+        
         model = load_model(model_path)
         st.write("Model loaded successfully.")  # Debugging line to confirm model loading
 
