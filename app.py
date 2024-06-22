@@ -5,24 +5,15 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import one_hot
 import pickle
 import emoji
-import os
 
 # Streamlit app title
-st.title('Unveiling Sentiment: A Deep Dive into Sentiment Analysis 🐨')
+st.title('Unveiling Sentiment A Deep Dive into Sentiment Analysis :koala:')
 
 # Function to load model and predict sentiment
 def predict_sentiment(custom_data):
-    model_path = '/mount/src/unveiling-sentiment-a-deep-dive-into-sentiment-analysis/sentiment_analysis_model.h5'  # Use absolute path
     try:
-        # Check if the model file exists
-        if not os.path.exists(model_path):
-            st.error(f"Model file not found at {model_path}")
-            return None
-
-        st.write(f"Model file found at {model_path}")
-
         # Load the trained model
-        model = load_model(model_path)
+        model = load_model('sentiment_analysis_model.h5')
 
         # Load the one-hot encoding information
         with open('one_hot_info_1.pkl', 'rb') as handle:
@@ -63,16 +54,16 @@ def predict_sentiment(custom_data):
         return None
 
 # Streamlit UI
-user_input = st.text_area("Please enter the tweet you'd like analyzed:")
+user_input = st.text_area("Please enter the tweet you'd like analyzed::whale:")
 
-if st.button('Analyze', key='analyze_button', help="Click to analyze the sentiment"):
+if st.button('Analyze'):
     if user_input.strip():  # Check if input is not empty
         # Remove emojis and replace with their description
         user_input = emoji.demojize(user_input)
-
+        
         # Split input by newlines to handle multiple tweets
         tweets = user_input.split('\n')
-
+        
         # Predict sentiment for custom data
         predicted_sentiments = predict_sentiment(tweets)
 
