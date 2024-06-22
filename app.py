@@ -13,10 +13,7 @@ st.title('Unveiling Sentiment A Deep Dive into Sentiment Analysis :koala:')
 # Function to load model and predict sentiment
 def predict_sentiment(custom_data):
     try:
-        # Get the current directory of the script
         current_dir = os.path.dirname(__file__)
-
-        # Define paths to model and pickle file
         model_path = os.path.join(current_dir, 'sentiment_analysis_model.h5')
         one_hot_info_path = os.path.join(current_dir, 'one_hot_info_1.pkl')
 
