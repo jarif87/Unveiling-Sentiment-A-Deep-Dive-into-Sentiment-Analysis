@@ -5,6 +5,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import one_hot
 import pickle
 import emoji
+import os
 
 # Streamlit app title
 st.title('Unveiling Sentiment A Deep Dive into Sentiment Analysis :koala:')
@@ -12,11 +13,18 @@ st.title('Unveiling Sentiment A Deep Dive into Sentiment Analysis :koala:')
 # Function to load model and predict sentiment
 def predict_sentiment(custom_data):
     try:
+        # Get the current directory of the script
+        current_dir = os.path.dirname(__file__)
+
+        # Define paths to model and pickle file
+        model_path = os.path.join(current_dir, 'sentiment_analysis_model.h5')
+        one_hot_info_path = os.path.join(current_dir, 'one_hot_info_1.pkl')
+
         # Load the trained model
-        model = load_model('sentiment_analysis_model.h5')
+        model = load_model(model_path)
 
         # Load the one-hot encoding information
-        with open('one_hot_info_1.pkl', 'rb') as handle:
+        with open(one_hot_info_path, 'rb') as handle:
             one_hot_info = pickle.load(handle)
 
         vocab_size = one_hot_info['vocab_size']
@@ -51,6 +59,7 @@ def predict_sentiment(custom_data):
 
     except Exception as e:
         st.error(f"Error during prediction: {e}")
+        st.write(traceback.format_exc())  # Display traceback for debugging
         return None
 
 # Streamlit UI
