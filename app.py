@@ -17,12 +17,11 @@ st.title('Unveiling Sentiment: A Deep Dive into Sentiment Analysis 🐨')
 def predict_sentiment(custom_data):
     try:
         # Load the trained model
-        model_path = 'sentiment_analysis_model.h5'  # Use the new model file
+        model_path = 'sentiment_analysis_model.h5'
         if not os.path.exists(model_path):
             st.error(f"Model file not found: {model_path}")
             return None
         model = load_model(model_path)
-        st.write("Model loaded successfully.")
         
         # Load the one-hot encoding information
         one_hot_info_path = 'one_hot_info_1.pkl'
@@ -31,7 +30,6 @@ def predict_sentiment(custom_data):
             return None
         with open(one_hot_info_path, 'rb') as handle:
             one_hot_info = pickle.load(handle)
-        st.write("One-hot info loaded successfully.")
 
         vocab_size = one_hot_info['vocab_size']
         max_len = one_hot_info['max_len']
@@ -91,3 +89,7 @@ if st.button('Analyze'):
                     st.write(f"{label}: {prob:.4f}")
     else:
         st.write("Please enter tweet(s) to analyze.")
+
+# Add some Streamlit visual effects
+st.snow()
+st.balloons()
