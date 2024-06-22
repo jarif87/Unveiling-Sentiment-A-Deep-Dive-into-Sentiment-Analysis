@@ -17,11 +17,21 @@ st.title('Unveiling Sentiment: A Deep Dive into Sentiment Analysis 🐨')
 def predict_sentiment(custom_data):
     try:
         # Load the trained model
-        model = load_model('sentiment_analysis_model.h5')
-
+        model_path = 'sentiment_analysis_model.h5'
+        if not os.path.exists(model_path):
+            st.error(f"Model file not found: {model_path}")
+            return None
+        model = load_model(model_path)
+        st.write("Model loaded successfully.")
+        
         # Load the one-hot encoding information
-        with open('one_hot_info_1.pkl', 'rb') as handle:
+        one_hot_info_path = 'one_hot_info_1.pkl'
+        if not os.path.exists(one_hot_info_path):
+            st.error(f"One-hot info file not found: {one_hot_info_path}")
+            return None
+        with open(one_hot_info_path, 'rb') as handle:
             one_hot_info = pickle.load(handle)
+        st.write("One-hot info loaded successfully.")
 
         vocab_size = one_hot_info['vocab_size']
         max_len = one_hot_info['max_len']
