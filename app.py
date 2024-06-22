@@ -22,6 +22,10 @@ def predict_sentiment(custom_data):
             st.error(f"Model file not found: {model_path}")
             return None
         st.write(f"Loading model from: {model_path}")
+        
+        # Checking file size and integrity
+        st.write(f"Model file size: {os.path.getsize(model_path)} bytes")
+        
         model = load_model(model_path)
         st.write("Model loaded successfully.")
         
@@ -31,6 +35,7 @@ def predict_sentiment(custom_data):
             st.error(f"One-hot info file not found: {one_hot_info_path}")
             return None
         st.write(f"Loading one-hot info from: {one_hot_info_path}")
+        
         with open(one_hot_info_path, 'rb') as handle:
             one_hot_info = pickle.load(handle)
         st.write("One-hot info loaded successfully.")
