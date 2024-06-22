@@ -6,6 +6,7 @@ from tensorflow.keras.preprocessing.text import one_hot
 import pickle
 import emoji
 import os
+import traceback  # Import traceback module for error handling
 
 # Streamlit app title
 st.title('Unveiling Sentiment A Deep Dive into Sentiment Analysis :koala:')
