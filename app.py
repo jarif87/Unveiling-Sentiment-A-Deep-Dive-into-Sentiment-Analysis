@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import numpy as np
 from tensorflow.keras.models import load_model
@@ -5,24 +6,21 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import one_hot
 import pickle
 import emoji
-import os
-import traceback  # Import traceback module for error handling
+
+# Set TensorFlow to use only CPU
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 # Streamlit app title
-st.title('Unveiling Sentiment A Deep Dive into Sentiment Analysis :koala:')
+st.title('Unveiling Sentiment: A Deep Dive into Sentiment Analysis 🐨')
 
 # Function to load model and predict sentiment
 def predict_sentiment(custom_data):
     try:
-        current_dir = os.path.dirname(__file__)
-        model_path = os.path.join(current_dir, 'sentiment_analysis_model.h5')
-        one_hot_info_path = os.path.join(current_dir, 'one_hot_info_1.pkl')
-
         # Load the trained model
-        model = load_model(model_path)
+        model = load_model('sentiment_analysis_model.h5')
 
         # Load the one-hot encoding information
-        with open(one_hot_info_path, 'rb') as handle:
+        with open('one_hot_info_1.pkl', 'rb') as handle:
             one_hot_info = pickle.load(handle)
 
         vocab_size = one_hot_info['vocab_size']
@@ -57,11 +55,10 @@ def predict_sentiment(custom_data):
 
     except Exception as e:
         st.error(f"Error during prediction: {e}")
-        st.write(traceback.format_exc())  # Display traceback for debugging
         return None
 
 # Streamlit UI
-user_input = st.text_area("Please enter the tweet you'd like analyzed::whale:")
+user_input = st.text_area("Please enter the tweet you'd like analyzed 🐋")
 
 if st.button('Analyze'):
     if user_input.strip():  # Check if input is not empty
