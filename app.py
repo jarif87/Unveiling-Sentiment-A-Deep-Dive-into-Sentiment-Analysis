@@ -16,26 +16,19 @@ st.title('Unveiling Sentiment: A Deep Dive into Sentiment Analysis 🐨')
 # Function to load model and predict sentiment
 def predict_sentiment(custom_data):
     try:
-        # Absolute path to the model file
-        model_path = os.path.join(os.getcwd(), 'sentiment_analysis_model.h5')
+        # Load the trained model
+        model_path = 'sentiment_analysis_model.h5'  # Use the new model file
         if not os.path.exists(model_path):
             st.error(f"Model file not found: {model_path}")
             return None
-        st.write(f"Loading model from: {model_path}")
-        
-        # Checking file size and integrity
-        st.write(f"Model file size: {os.path.getsize(model_path)} bytes")
-        
         model = load_model(model_path)
         st.write("Model loaded successfully.")
         
-        # Absolute path to the one-hot encoding information
-        one_hot_info_path = os.path.join(os.getcwd(), 'one_hot_info_1.pkl')
+        # Load the one-hot encoding information
+        one_hot_info_path = 'one_hot_info_1.pkl'
         if not os.path.exists(one_hot_info_path):
             st.error(f"One-hot info file not found: {one_hot_info_path}")
             return None
-        st.write(f"Loading one-hot info from: {one_hot_info_path}")
-        
         with open(one_hot_info_path, 'rb') as handle:
             one_hot_info = pickle.load(handle)
         st.write("One-hot info loaded successfully.")
